@@ -10,6 +10,9 @@ next: tags-and-attributes-ko-KR.html
 
 `React.createClass()`를 호출하여 컴포넌트 클래스를 생성할 때, `render` 메소드를 포함한 명세 객체를 제공해야 합니다. 또한 필요한 경우 여기에서 설명하는 다른 생명주기 메소드를 명세 객체에 추가로 제공할 수 있습니다.
 
+> 주의:
+>
+> 그냥 JavaScript 클래스를 컴포넌트 클래스로 사용할 수도 있습니다. 이 클래스는 구현할 수 있는 메소드가 거의 같지만 약간의 차이가 있습니다. 차이에 관한 더 자세한 정보는 [ES6 클래스](/react/docs/reusable-components-ko-KR.html#es6-classes)를 읽어보세요.
 
 ### render
 
@@ -107,7 +110,7 @@ string displayName
 ### 마운트 시: componentWillMount
 
 ```javascript
-componentWillMount()
+void componentWillMount()
 ```
 
 최초 렌더링이 일어나기 직전에 클라이언트 및 서버에서 한번 호출됩니다. 이 메소드 안에서 `setState`를 호출하면, `render()`에서 업데이트된 state를 확인할 수 있고 state가 변함에도 불구하고 `render()`가 한번만 실행됩니다.
@@ -116,7 +119,7 @@ componentWillMount()
 ### 마운트 시: componentDidMount
 
 ```javascript
-componentDidMount()
+void componentDidMount()
 ```
 
 최초 렌더링이 일어난 다음 클라이언트에서만 한번 호출됩니다. (서버에서는 호출되지 않습니다.) 이 시점에 컴포넌트는 `React.findDOMNode(this)`로 접근 가능한 DOM 표현을 가집니다.
@@ -127,7 +130,7 @@ componentDidMount()
 ### 업데이트 시: componentWillReceiveProps
 
 ```javascript
-componentWillReceiveProps(object nextProps)
+void componentWillReceiveProps(object nextProps)
 ```
 
 컴포넌트가 새로운 props를 받을 때 호출됩니다. 이 메소드는 최초 렌더링 시에는 호출되지 않습니다.
@@ -175,7 +178,7 @@ shouldComponentUpdate: function(nextProps, nextState) {
 ### 업데이트 시: componentWillUpdate
 
 ```javascript
-componentWillUpdate(object nextProps, object nextState)
+void componentWillUpdate(object nextProps, object nextState)
 ```
 
 새로운 props나 state를 받았을 때 렌더링 직전에 호출됩니다. 최초 렌더링 시에는 호출되지 않습니다.
@@ -190,7 +193,7 @@ componentWillUpdate(object nextProps, object nextState)
 ### 업데이트 시: componentDidUpdate
 
 ```javascript
-componentDidUpdate(object prevProps, object prevState)
+void componentDidUpdate(object prevProps, object prevState)
 ```
 
 컴포넌트의 업데이트가 DOM에 반영된 직후에 호출됩니다. 최초 렌더링 시에는 호출되지 않습니다.
@@ -201,7 +204,7 @@ componentDidUpdate(object prevProps, object prevState)
 ### 마운트 해제 시: componentWillUnmount
 
 ```javascript
-componentWillUnmount()
+void componentWillUnmount()
 ```
 
 컴포넌트가 DOM에서 마운트 해제 되기 직전에 호출됩니다.

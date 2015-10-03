@@ -16,13 +16,14 @@ UI를 가지고 할 수 있는 가장 기초적인 것은 데이터를 표시하
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="UTF-8" />
     <title>Hello React</title>
     <script src="https://fb.me/react-{{site.react_version}}.js"></script>
-    <script src="https://fb.me/JSXTransformer-{{site.react_version}}.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
   </head>
   <body>
     <div id="example"></div>
-    <script type="text/jsx">
+    <script type="text/babel">
 
       // ** 코드는 여기에 작성하면 됩니다! **
 
@@ -31,7 +32,7 @@ UI를 가지고 할 수 있는 가장 기초적인 것은 데이터를 표시하
 </html>
 ```
 
-문서의 나머지에서, 코드가 위와 같은 HTML 템플릿에 들어갔다고 가정하고 JavaScript 코드에만 집중할 것입니다. 위의 주석 부분을 다음과 같은 JavaScript 코드로 바꿔 보세요:
+문서의 나머지에서, 코드가 위와 같은 HTML 템플릿에 들어갔다고 가정하고 JavaScript 코드에만 집중할 것입니다. 위의 주석 부분을 다음과 같은 JSX 코드로 바꿔 보세요:
 
 ```javascript
 var HelloWorld = React.createClass({
@@ -65,7 +66,7 @@ setInterval(function() {
 
 ## 컴포넌트들은 함수와 같습니다
 
-React 컴포넌트들은 매우 단순합니다. 당신은 그것들을 `props` 와 `state` (이것들은 나중에 언급할 것입니다) 를 받고 HTML을 렌더링하는 단순한 함수들로 생각해도 됩니다. 그것들은 너무 단순하기 때문에, 그것들의 작동을 이해하는 것 또한 쉽게 만듭니다.
+React 컴포넌트들은 매우 단순합니다. 당신은 그것들을 `props` 와 `state` (이것들은 나중에 언급할 것입니다) 를 받고 HTML을 렌더링하는 단순한 함수들로 생각해도 됩니다. 이걸 염두하면, 컴포넌트의 작동을 이해하는 것도 쉽습니다.
 
 > 주의:
 >

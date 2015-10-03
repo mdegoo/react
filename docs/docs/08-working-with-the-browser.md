@@ -13,53 +13,14 @@ React provides powerful abstractions that free you from touching the DOM directl
 
 React is so fast because it never talks to the DOM directly. React maintains a fast in-memory representation of the DOM. `render()` methods return a *description* of the DOM, and React can diff this description with the in-memory representation to compute the fastest way to update the browser.
 
-Additionally, React implements a full synthetic event system such that all event objects are guaranteed to conform to the W3C spec despite browser quirks, and everything bubbles consistently and in a performant way cross-browser. You can even use some HTML5 events in IE8!
+Additionally, React implements a full synthetic event system such that all event objects are guaranteed to conform to the W3C spec despite browser quirks, and everything bubbles consistently and efficiently across browsers. You can even use some HTML5 events in IE8!
 
 Most of the time you should stay within React's "faked browser" world since it's more performant and easier to reason about. However, sometimes you simply need to access the underlying API, perhaps to work with a third-party library like a jQuery plugin. React provides escape hatches for you to use the underlying DOM API directly.
 
 
 ## Refs and findDOMNode()
 
-To interact with the browser, you'll need a reference to a DOM node. React has a `React.findDOMNode(component)` function which you can call to get a reference to the component's DOM node.
-
-> Note:
->
-> `findDOMNode()` only works on mounted components (that is, components that have been placed in the DOM). If you try to call this on a component that has not been mounted yet (like calling `findDOMNode()` in `render()` on a component that has yet to be created) an exception will be thrown.
-
-In order to get a reference to a React component, you can either use `this` to get the current React component, or you can use refs to refer to a component you own. They work like this:
-
-```javascript
-var MyComponent = React.createClass({
-  handleClick: function() {
-    // Explicitly focus the text input using the raw DOM API.
-    React.findDOMNode(this.refs.myTextInput).focus();
-  },
-  render: function() {
-    // The ref attribute adds a reference to the component to
-    // this.refs when the component is mounted.
-    return (
-      <div>
-        <input type="text" ref="myTextInput" />
-        <input
-          type="button"
-          value="Focus the text input"
-          onClick={this.handleClick}
-        />
-      </div>
-    );
-  }
-});
-
-React.render(
-  <MyComponent />,
-  document.getElementById('example')
-);
-```
-
-
-## More About Refs
-
-To learn more about refs, including ways to use them effectively, see our [more about refs](/react/docs/more-about-refs.html) documentation.
+To interact with the browser, you'll need a reference to a DOM node. You can attach a `ref` to any element, which allows you to reference the **backing instance** of the component.  This is useful if you need to invoke imperative functions on the component, or want to access the underlying DOM nodes.  To learn more about refs, including ways to use them effectively, see our [refs to components](/react/docs/more-about-refs.html) documentation.
 
 
 ## Component Lifecycle
@@ -83,7 +44,7 @@ React provides lifecycle methods that you can specify to hook into this process.
 ### Updating
 
 * `componentWillReceiveProps(object nextProps)` is invoked when a mounted component receives new props. This method should be used to compare `this.props` and `nextProps` to perform state transitions using `this.setState()`.
-* `shouldComponentUpdate(object nextProps, object nextState): boolean` is invoked when a component decides whether any changes warrant an update to the DOM. Implement this as an optimization to compare `this.props` with `nextProps` and `this.state` with `nextState` and return false if React should skip updating.
+* `shouldComponentUpdate(object nextProps, object nextState): boolean` is invoked when a component decides whether any changes warrant an update to the DOM. Implement this as an optimization to compare `this.props` with `nextProps` and `this.state` with `nextState` and return `false` if React should skip updating.
 * `componentWillUpdate(object nextProps, object nextState)` is invoked immediately before updating occurs. You cannot call `this.setState()` here.
 * `componentDidUpdate(object prevProps, object prevState)` is invoked immediately after updating occurs.
 

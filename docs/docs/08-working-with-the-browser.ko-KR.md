@@ -13,7 +13,7 @@ React는 대부분의 경우 직접 DOM을 다루지 않아도 될만큼 강력�
 
 React는 DOM을 직접 다루지 않기 때문에 굉장히 빠릅니다. React는 메모리에(in-memory) DOM의 표상(representation)을 관리합니다. `render()` 메소드는 DOM의 *서술*를 반환하고, React는 이를 메모리에 있는 DOM의 표상과 비교(diff)해 가장 빠른 방식으로 계산해서 브라우저를 업데이트해 줍니다.
 
-게다가 React는 브라우저의 괴악함(quirks)에도 불구하고 모든 이벤트 객체가 W3C 명세를 보장하도록 통합적인 이벤트 시스템을 구현했습니다. 모든 것이 일관된 방식으로 일어나고(bubbles) 효율적인 방식으로 크로스 브라우징을 수행합니다. 심지어 IE8에서도 HTML5 이벤트를 사용할 수 있습니다!
+게다가 React는 브라우저의 괴악함(quirks)에도 불구하고 모든 이벤트 객체가 W3C 명세를 보장하도록 통합적인 이벤트 시스템을 구현했습니다. 모든 것이 일관된 방식으로 일어나고(bubbles) 효율적으로 크로스 브라우징을 수행합니다. 심지어 IE8에서도 HTML5 이벤트를 사용할 수 있습니다!
 
 더 효율적이고 쉬우므로 대개의 경우 React의 "가짜 브라우저"를 이용해 작업을 하게 될 것입니다. 하지만 간혹 jQuery 플러그인 같은 서드파티 라이브러리를 다루다 보면 기저(underlying)의 API에 접근할 필요가 있을지도 모릅니다. React는 기저의 DOM API를 직접 다루는 회피방법을 제공합니다.
 
@@ -83,7 +83,7 @@ React는 이 프로세스에 훅을 지정할 수 있는 생명주기 메소드�
 ### Updating
 
 * `componentWillReceiveProps(object nextProps)`는 마운트된 컴포넌트가 새로운 props을 받을 때 호출됩니다. 이 메소드는 `this.props`와 `nextProps`을 비교하여 `this.setState()`를 사용해 상태 변환을 수행하는데 사용되야 합니다.
-* `shouldComponentUpdate(object nextProps, object nextState): boolean`는 컴포넌트가 어떤 변경이 DOM의 업데이트를 보증하는지 결정해야 할 때 호출됩니다. 최적화하려면, React가 업데이트를 무시해야할 때 `this.props`와 `nextProps`를, `this.state`와 `nextState`를 비교해 false를 리턴하면 됩니다. 
+* `shouldComponentUpdate(object nextProps, object nextState): boolean`는 컴포넌트가 어떤 변경이 DOM의 업데이트를 보증하는지 결정해야 할 때 호출됩니다. 최적화하려면, React가 업데이트를 무시해야할 때 `this.props`와 `nextProps`를, `this.state`와 `nextState`를 비교해 `false`를 리턴하면 됩니다.
 * `componentWillUpdate(object nextProps, object nextState)`는 업데이트가 발생하기 직전에 호출됩니다. 이 시점에는 `this.setState()`를 호출할 수 없습니다.
 * `componentDidUpdate(object prevProps, object prevState)`는 업데이트가 발생한 후 즉시 호출됩니다.
 

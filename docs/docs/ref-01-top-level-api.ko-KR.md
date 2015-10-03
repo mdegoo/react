@@ -86,8 +86,9 @@ ReactComponent render(
 
 > 주의:
 >
-> `React.render()`는 넘어온 컨테이너 노드의 내용을 교체합니다.
-> 추후에 기존 자식들을 덮어쓰지 않고 이미 있는 DOM 노드에 컴포넌트를 삽입하는 것도 지원할 가능성이 있습니다.
+> `React.render()`는 넘어온 컨테이너 노드의 내용을 교체합니다. 안에 있는 DOM 엘리먼트는 첫 호출을 할 때 교체됩니다. 그 후의 호출에는 효율석으로 업데이트하기 위해 React의 DOM diff 알고리즘을 사용합니다.
+>
+> `React.render()`는 컨테이너 노드를 수정하지 않습니다. (컨테이너의 자식만 수정함) 추후에 기존 자식들을 덮어쓰지 않고 이미 있는 DOM 노드에 컴포넌트를 삽입하는 것도 지원할 가능성이 있습니다.
 
 
 ### React.unmountComponentAtNode
@@ -152,15 +153,15 @@ DOMElement findDOMNode(ReactComponent component)
 #### React.Children.map
 
 ```javascript
-object React.Children.map(object children, function fn [, object context])
+object React.Children.map(object children, function fn [, object thisArg])
 ```
 
-`children`의 바로 밑에 있는 모든 자식에 `fn`을 호출합니다. 이 때 `this`는 `context`로 설정됩니다. `children`이 중첩된 객체나 배열일 경우 그 안의 값을 순회합니다. 따라서 `fn`에 컨테이너 객체가 넘어가는 일은 일어나지 않습니다. `children`이 `null`이거나 `undefined`면 빈 객체 대신 `null` 또는 `undefined`를 리턴합니다.
+`children`의 바로 밑에 있는 모든 자식에 `fn`을 호출합니다. 이 때 `this`는 `thisArg`로 설정됩니다. `children`이 중첩된 객체나 배열일 경우 그 안의 값을 순회합니다. 따라서 `fn`에 컨테이너 객체가 넘어가는 일은 일어나지 않습니다. `children`이 `null`이거나 `undefined`면 빈 객체 대신 `null` 또는 `undefined`를 리턴합니다.
 
 #### React.Children.forEach
 
 ```javascript
-React.Children.forEach(object children, function fn [, object context])
+React.Children.forEach(object children, function fn [, object thisArg])
 ```
 
 `React.Children.map()`과 비슷하지만 객체를 리턴하지 않습니다.

@@ -11,13 +11,13 @@ React에서는 컴포넌트를 감싸서 추상화하는 것이 일반적인 패
 [JSX 스프레드 어트리뷰트](/react/docs/jsx-spread-ko-KR.html)를 통해 props에 추가적인 값을 병합할 수 있습니다.
 
 ```javascript
-return <Component {...this.props} more="values" />;
+<Component {...this.props} more="values" />
 ```
 
 만약 JSX를 사용하지 않는다면 ES6의 `Object.assign`나 Underscore의 `_.extend` 같은 객체 헬퍼를 사용할 수 있습니다:
 
 ```javascript
-return Component(Object.assign({}, this.props, { more: 'values' }));
+React.createElement(Component, Object.assign({}, this.props, { more: 'values' }));
 ```
 
 이 튜토리얼의 나머지 부분은 모범 답안을 소개할 것입니다. JSX와 실험적인 ES7 구문을 사용합니다.
@@ -83,7 +83,7 @@ React.render(
 ```
 
 > 주의:
-> 
+>
 > 위의 예제에서는 `checked` prop 또한 마찬가지로 유효한 DOM 어트리뷰트입니다. 이런 식으로 구조의 해체(destructuring)를 하지 않으면 의도하지 않게 함께 전달될 수 있습니다.
 
 미상의 `other` props을 전달할 때는 항상 구조 해체 패턴을 사용하세요.
@@ -102,7 +102,7 @@ var FancyCheckbox = React.createClass({
 
 ## 같은 Prop을 소비하고 전달하기
 
-컴포넌트가 프로퍼티를 사용하지만 계속 넘겨야한다면, `checked={checked}`처럼 명시적으로 다시 넘길 수 있습니다. 리팩토링과 린트(lint)하기가 더 쉬우므로 이 방식이 `this.props` 객체 전부를 넘기는 것보다 낫습니다.
+컴포넌트가 프로퍼티를 사용하지만 계속 넘기길 원한다면, `checked={checked}`처럼 명시적으로 다시 넘길 수 있습니다. 리팩토링과 린트(lint)하기가 더 쉬우므로 이 방식이 `this.props` 객체 전부를 넘기는 것보다 낫습니다.
 
 ```javascript
 var FancyCheckbox = React.createClass({
@@ -125,7 +125,7 @@ var FancyCheckbox = React.createClass({
 ```
 
 > 주의:
-> 
+>
 > 순서는 중요합니다. `{...other}`를 JSX props 이전에 넣는 것으로 컴포넌트의 사용자가 확실히 그것들을 오버라이드 할 수 없게 합니다. 위의 예제에서는 input이 `"checkbox"` 타입인 것을 보장합니다.
 
 <a name="rest-and-spread-properties-..."></a>

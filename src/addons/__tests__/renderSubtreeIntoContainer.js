@@ -17,18 +17,18 @@ var renderSubtreeIntoContainer = require('renderSubtreeIntoContainer');
 
 describe('renderSubtreeIntoContainer', function() {
 
-  it('should pass context when rendering subtree elsewhere', function () {
+  it('should pass context when rendering subtree elsewhere', function() {
 
     var portal = document.createElement('div');
 
     var Component = React.createClass({
       contextTypes: {
-        foo: React.PropTypes.string.isRequired
+        foo: React.PropTypes.string.isRequired,
       },
 
       render: function() {
         return <div>{this.context.foo}</div>;
-      }
+      },
     });
 
     var Parent = React.createClass({
@@ -38,7 +38,7 @@ describe('renderSubtreeIntoContainer', function() {
 
       getChildContext: function() {
         return {
-          foo: 'bar'
+          foo: 'bar',
         };
       },
 
@@ -50,24 +50,24 @@ describe('renderSubtreeIntoContainer', function() {
         expect(function() {
           renderSubtreeIntoContainer(this, <Component />, portal);
         }.bind(this)).not.toThrow();
-      }
+      },
     });
 
     ReactTestUtils.renderIntoDocument(<Parent />);
     expect(portal.firstChild.innerHTML).toBe('bar');
   });
 
-  it('should throw if parentComponent is invalid', function () {
+  it('should throw if parentComponent is invalid', function() {
     var portal = document.createElement('div');
 
     var Component = React.createClass({
       contextTypes: {
-        foo: React.PropTypes.string.isRequired
+        foo: React.PropTypes.string.isRequired,
       },
 
       render: function() {
         return <div>{this.context.foo}</div>;
-      }
+      },
     });
 
     var Parent = React.createClass({
@@ -77,7 +77,7 @@ describe('renderSubtreeIntoContainer', function() {
 
       getChildContext: function() {
         return {
-          foo: 'bar'
+          foo: 'bar',
         };
       },
 
@@ -90,7 +90,7 @@ describe('renderSubtreeIntoContainer', function() {
           renderSubtreeIntoContainer(<Parent />, <Component />, portal);
         }).toThrow('Invariant Violation: parentComponent' +
           'must be a valid React Component');
-      }
+      },
     });
   });
 });

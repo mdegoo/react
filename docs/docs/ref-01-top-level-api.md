@@ -81,7 +81,7 @@ ReactComponent render(
 )
 ```
 
-Render a ReactElement into the DOM in the supplied `container` and return a reference to the component.
+Render a ReactElement into the DOM in the supplied `container` and return a [reference](/react/docs/more-about-refs.html) to the component (or returns `null` for [stateless components](/react/docs/reusable-components.html#stateless-functions)).
 
 If the ReactElement was previously rendered into `container`, this will perform an update on it and only mutate the DOM as necessary to reflect the latest React component.
 
@@ -89,9 +89,13 @@ If the optional callback is provided, it will be executed after the component is
 
 > Note:
 >
-> `React.render()` replaces the contents of the container node you
-> pass in. In the future, it may be possible to insert a component to an
-> existing DOM node without overwriting the existing children.
+> `React.render()` controls the contents of the container node you pass in. Any existing DOM elements
+> inside are replaced when first called. Later calls use React’s DOM diffing algorithm for efficient
+> updates.
+>
+> `React.render()` does not modify the container node (only modifies the children of the container). In
+> the future, it may be possible to insert a component to an existing DOM node without overwriting
+> the existing children.
 
 
 ### React.unmountComponentAtNode
@@ -139,6 +143,12 @@ DOMElement findDOMNode(ReactComponent component)
 ```
 If this component has been mounted into the DOM, this returns the corresponding native browser DOM element. This method is useful for reading values out of the DOM, such as form field values and performing DOM measurements. When `render` returns `null` or `false`, `findDOMNode` returns `null`.
 
+> Note:
+>
+> `findDOMNode()` is an escape hatch used to access the underlying DOM node. In most cases, use of this escape hatch is discouraged because it pierces the component abstraction. However, there are some situations where this is necessary (for instance, you may need to find a DOM node in order to position it absolutely or to determine the rendered width measured in pixels).
+
+>
+> `findDOMNode()` only works on mounted components (that is, components that have been placed in the DOM). If you try to call this on a component that has not been mounted yet (like calling `findDOMNode()` in `render()` on a component that has yet to be created) an exception will be thrown.
 
 ### React.DOM
 
@@ -157,15 +167,15 @@ If this component has been mounted into the DOM, this returns the corresponding 
 #### React.Children.map
 
 ```javascript
-object React.Children.map(object children, function fn [, object context])
+object React.Children.map(object children, function fn [, object thisArg])
 ```
 
-Invoke `fn` on every immediate child contained within `children` with `this` set to `context`. If `children` is a nested object or array it will be traversed: `fn` will never be passed the container objects. If children is `null` or `undefined` returns `null` or `undefined` rather than an empty object.
+Invoke `fn` on every immediate child contained within `children` with `this` set to `thisArg`. If `children` is a nested object or array it will be traversed: `fn` will never be passed the container objects. If children is `null` or `undefined` returns `null` or `undefined` rather than an empty object.
 
 #### React.Children.forEach
 
 ```javascript
-React.Children.forEach(object children, function fn [, object context])
+React.Children.forEach(object children, function fn [, object thisArg])
 ```
 
 Like `React.Children.map()` but does not return an object.

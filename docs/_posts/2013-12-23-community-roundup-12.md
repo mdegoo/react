@@ -1,6 +1,6 @@
 ---
 title: "Community Round-up #12"
-author: Vjeux
+author: vjeux
 ---
 
 React got featured on the front-page of Hacker News thanks to the Om library. If you try it out for the first time, take a look at the [docs](/react/docs/getting-started.html) and do not hesitate to ask questions on the [Google Group](https://groups.google.com/group/reactjs), [IRC](irc://chat.freenode.net/reactjs) or [Stack Overflow](http://stackoverflow.com/questions/tagged/reactjs). We are trying our best to help you out!
@@ -62,8 +62,6 @@ React declarative approach is well suited to write games. [Cheng Lou](https://gi
 ## MontageJS Tutorial in React
 
 [Ross Allen](https://twitter.com/ssorallen) implemented [MontageJS](http://montagejs.org/)'s [Reddit tutorial](http://montagejs.org/docs/tutorial-reddit-client-with-montagejs.html) in React. This is a good opportunity to compare the philosophies of the two libraries.
-
-<iframe width="100%" height="300" src="https://jsfiddle.net/ssorallen/fEsYt/embedded/result,html,js" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
 [View the source on JSFiddle...](https://jsfiddle.net/ssorallen/fEsYt/)
 

@@ -10,6 +10,9 @@ next: tags-and-attributes.html
 
 When creating a component class by invoking `React.createClass()`, you should provide a specification object that contains a `render` method and can optionally contain other lifecycle methods described here.
 
+> Note:
+>
+> It is also possible to use plain JavaScript classes as component classes. These classes can implement most of the same methods, though there are some differences. For more information about these differences, please read our documentation about [ES6 classes](/react/docs/reusable-components.html#es6-classes).
 
 ### render
 
@@ -106,7 +109,7 @@ Various methods are executed at specific points in a component's lifecycle.
 ### Mounting: componentWillMount
 
 ```javascript
-componentWillMount()
+void componentWillMount()
 ```
 
 Invoked once, both on the client and server, immediately before the initial rendering occurs. If you call `setState` within this method, `render()` will see the updated state and will be executed only once despite the state change.
@@ -115,10 +118,10 @@ Invoked once, both on the client and server, immediately before the initial rend
 ### Mounting: componentDidMount
 
 ```javascript
-componentDidMount()
+void componentDidMount()
 ```
 
-Invoked once, only on the client (not on the server), immediately after the initial rendering occurs. At this point in the lifecycle, the component has a DOM representation which you can access via `React.findDOMNode(this)`.
+Invoked once, only on the client (not on the server), immediately after the initial rendering occurs. At this point in the lifecycle, the component has a DOM representation which you can access via `React.findDOMNode(this)`. The `componentDidMount()` method of child components is invoked before that of parent components.
 
 If you want to integrate with other JavaScript frameworks, set timers using `setTimeout` or `setInterval`, or send AJAX requests, perform those operations in this method.
 
@@ -126,7 +129,9 @@ If you want to integrate with other JavaScript frameworks, set timers using `set
 ### Updating: componentWillReceiveProps
 
 ```javascript
-componentWillReceiveProps(object nextProps)
+void componentWillReceiveProps(
+  object nextProps
+)
 ```
 
 Invoked when a component is receiving new props. This method is not called for the initial render.
@@ -149,7 +154,9 @@ componentWillReceiveProps: function(nextProps) {
 ### Updating: shouldComponentUpdate
 
 ```javascript
-boolean shouldComponentUpdate(object nextProps, object nextState)
+boolean shouldComponentUpdate(
+  object nextProps, object nextState
+)
 ```
 
 Invoked before rendering when new props or state are being received. This method is not called for the initial render or when `forceUpdate` is used.
@@ -163,9 +170,9 @@ shouldComponentUpdate: function(nextProps, nextState) {
 }
 ```
 
-If `shouldComponentUpdate` returns false, then `render()` will be completely skipped until the next state change. (In addition, `componentWillUpdate` and `componentDidUpdate` will not be called.)
+If `shouldComponentUpdate` returns false, then `render()` will be completely skipped until the next state change. In addition, `componentWillUpdate` and `componentDidUpdate` will not be called.
 
-By default, `shouldComponentUpdate` always returns true to prevent subtle bugs when `state` is mutated in place, but if you are careful to always treat `state` as immutable and to read only from `props` and `state` in `render()` then you can override `shouldComponentUpdate` with an implementation that compares the old props and state to their replacements.
+By default, `shouldComponentUpdate` always returns `true` to prevent subtle bugs when `state` is mutated in place, but if you are careful to always treat `state` as immutable and to read only from `props` and `state` in `render()` then you can override `shouldComponentUpdate` with an implementation that compares the old props and state to their replacements.
 
 If performance is a bottleneck, especially with dozens or hundreds of components, use `shouldComponentUpdate` to speed up your app.
 
@@ -173,7 +180,9 @@ If performance is a bottleneck, especially with dozens or hundreds of components
 ### Updating: componentWillUpdate
 
 ```javascript
-componentWillUpdate(object nextProps, object nextState)
+void componentWillUpdate(
+  object nextProps, object nextState
+)
 ```
 
 Invoked immediately before rendering when new props or state are being received. This method is not called for the initial render.
@@ -188,7 +197,9 @@ Use this as an opportunity to perform preparation before an update occurs.
 ### Updating: componentDidUpdate
 
 ```javascript
-componentDidUpdate(object prevProps, object prevState)
+void componentDidUpdate(
+  object prevProps, object prevState
+)
 ```
 
 Invoked immediately after the component's updates are flushed to the DOM. This method is not called for the initial render.
@@ -199,7 +210,7 @@ Use this as an opportunity to operate on the DOM when the component has been upd
 ### Unmounting: componentWillUnmount
 
 ```javascript
-componentWillUnmount()
+void componentWillUnmount()
 ```
 
 Invoked immediately before a component is unmounted from the DOM.
